@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Digital Modern</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: url('pexels-jakson-martins-8700702.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        #clock-container {
+            background: linear-gradient(135deg, #000000, #2c3e50);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #clock {
+            font-size: 4em;
+            color: #ecf0f1;
+            margin-bottom: 10px;
+        }
+
+        #date {
+            font-size: 2em;
+            color: #bdc3c7;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock-container">
+        <div id="date"></div>
+        <div id="clock"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            let tanggal = new Date();
+            let options = { timeZone: 'Asia/Jakarta' };
+            let time_now = tanggal.toLocaleTimeString('id-ID', options);
+            document.getElementById('clock').innerHTML = time_now;
+
+            var kode_hari = tanggal.getDay();
+            var nama_hari = "";
+            switch (kode_hari) {
+                case 0:
+                    nama_hari = "Minggu";
+                    break;
+                case 1:
+                    nama_hari = "Senin";
+                    break;
+                case 2:
+                    nama_hari = "Selasa";
+                    break;
+                case 3:
+                    nama_hari = "Rabu";
+                    break;
+                case 4:
+                    nama_hari = "Kamis";
+                    break;
+                case 5:
+                    nama_hari = "Jumat";
+                    break;
+                case 6:
+                    nama_hari = "Sabtu";
+                    break;
+            }
+
+            var bulan_singkat = new Intl.DateTimeFormat('id-ID', { month: 'short' }).format(tanggal);
+
+            document.getElementById("date").innerHTML = nama_hari + ", " + tanggal.getDate() + " " + bulan_singkat + " " + tanggal.getFullYear();
+        }
+
+        // Panggil fungsi pertama kali agar waktu dan tanggal ditampilkan segera
+        updateClock();
+
+        // Perbarui setiap detik (1000 milidetik)
+        setInterval(updateClock, 1000);
+    </script>
+</body>
+</html>
